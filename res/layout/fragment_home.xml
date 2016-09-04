@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <include layout="@layout/main_title" />
+    </LinearLayout>
+
+    <com.hito.schoolcube.view.myViewPager
+        android:layout_width="match_parent"
+        android:layout_height="150dp" >
+    </com.hito.schoolcube.view.myViewPager>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/btn_club_info"
+            style="@null"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/bottom_border_style_checked"
+            android:gravity="center"
+            android:text="社团活动" />
+
+        <Button
+            android:id="@+id/btn_school_info"
+            style="@null"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/bottom_border_style"
+            android:gravity="center"
+            android:text="本校活动" />
+    </LinearLayout>
+
+    <com.hito.schoolcube.view.PullToRefush
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <ListView
+            android:id="@+id/fragment_home_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+        </ListView>
+    </com.hito.schoolcube.view.PullToRefush>
+
+</LinearLayout>

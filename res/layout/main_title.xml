@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50sp"
+    android:background="@color/green_look" >
+
+    <ImageButton
+        android:id="@+id/main_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="20sp"
+        android:background="@null"
+        android:contentDescription="@null"
+        android:src="@drawable/home_search" />
+
+    <ImageButton
+        android:id="@+id/main_news"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="20sp"
+        android:background="@null"
+        android:contentDescription="@null"
+        android:src="@drawable/home_news" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toLeftOf="@+id/main_news"
+        android:layout_toRightOf="@+id/main_search"
+        android:gravity="center"
+        android:text="首页"
+        android:textColor="@android:color/white"
+        android:textSize="22sp" />
+
+</RelativeLayout>
