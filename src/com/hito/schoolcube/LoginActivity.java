@@ -67,23 +67,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 				DialogUtils.showToastShort(LoginActivity.this, "µÇÂ¼Ê§°Ü");
 			}
 
-			// String body = (String) msg.obj;
-			// // System.out.println(body);
-			// // TODO ½âÎöjson
-			// String s = analyJson(body);
-			// if (s.equals("1")) {
-			// Toast.makeText(LoginActivity.this, "µÇÂ¼³É¹¦", 0).show();
-			// if (cb_remreber.isChecked()) {
-			// Editor editor = sp.edit();
-			// editor.putString("username", username);
-			// editor.putString("pwd", pwd);
-			// editor.commit();
-			// }
-			// enterHome();
-			// } else {
-			// Toast.makeText(LoginActivity.this, "µÇÂ¼Ê§°Ü", 0).show();
-			// }
-			// // Toast.makeText(LoginActivity.this, body, 0).show();
+			
 		}
 
 	};
