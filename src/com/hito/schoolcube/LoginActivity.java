@@ -66,10 +66,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 			} else {
 				DialogUtils.showToastShort(LoginActivity.this, "µÇÂ¼Ê§°Ü");
 			}
-
-			
 		}
-
 	};
 
 	public void enterHome() {
@@ -201,7 +198,6 @@ public class LoginActivity extends Activity implements OnClickListener {
 						Message msg = Message.obtain();
 						msg.obj = body;
 						handler.sendMessage(msg);
-
 					}
 				} catch (Exception e) {
 					e.printStackTrace();

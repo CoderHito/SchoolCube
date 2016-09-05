@@ -30,4 +30,28 @@ public class API {
 	// 获取HTML
 	public static final String API10008 = BASE_URL1
 			+ "app/appNews!doGetNewsHtml.action";
+	// 检查新版本
+	public static final String API00001 = BASE_URL1
+			+ "appjs/data!version.action";
+	// 根据用户编号获取用户的基本信息
+	public static final String API10011 = BASE_URL1
+			+ "appjs/appUser!doGetUserByOpenID.action";
+	// 上传头像
+	public static final String API10012 = BASE_URL1
+			+ "app/appUser!doupHeadImage.action";
+	// 获取用户关注的人
+	public static final String API10013 = BASE_URL1
+			+ "appjs/appUser!showAllIConcernUser.action";
+	// 更改用户名
+	public static final String API10014 = BASE_URL1
+			+ "appjs/appUser!updateNameByOpenID.action";
+	// 加入社团
+	public static final String API10015 = BASE_URL1
+			+ "appjs/appUser!doaddBoardUser.action";
+	// 获取操场帖子信息
+	public static final String API20001 = BASE_URL1
+			+ "appjs/appPost!doGetPosts.action";
+	// 获取所有的社团信息
+	public static final String API20002 = BASE_URL1
+			+ "appjs/appBoard!doGetBoard.action";
 }
