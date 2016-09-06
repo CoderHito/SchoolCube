@@ -1,6 +1,5 @@
 package com.hito.schoolcube.fragment;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,8 +7,11 @@ import java.util.Map;
 import com.hito.schoolcube.R;
 import com.hito.schoolcube.api.API;
 import com.hito.schoolcube.entity.News;
+import com.hito.schoolcube.utils.AsyncImageLoader;
 import com.hito.schoolcube.utils.BaseOperate.AsyncRequestCallBack;
+import com.hito.schoolcube.utils.FileManager;
 import com.hito.schoolcube.utils.NewsOperate;
+import com.hito.schoolcube.utils.Setting;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -17,6 +19,7 @@ import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 
 import android.app.Fragment;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.view.PagerAdapter;
@@ -128,25 +131,42 @@ public class HomeFragment extends Fragment implements OnClickListener {
 			return data == null ? 0 : data.size();
 		}
 
+		ViewHolder holder;
+
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			View view;
-			ViewHolder holder;
 			if (convertView != null) {
 				view = convertView;
 				holder = (ViewHolder) view.getTag();
-			} else {
-				view = View.inflate(getActivity(), R.layout.homefragment_news,
-						null);
-				holder = new ViewHolder();
-				holder.iv_icon = (ImageView) view.findViewById(R.id.iv_news);
-				holder.tv_desc = (TextView) view.findViewById(R.id.tv_desc);
-				holder.tv_title = (TextView) view.findViewById(R.id.tv_title);
-				view.setTag(holder);
 			}
+
+			view = View
+					.inflate(getActivity(), R.layout.homefragment_news, null);
+			holder = new ViewHolder();
+			holder.iv_icon = (ImageView) view.findViewById(R.id.iv_news);
+			holder.tv_desc = (TextView) view.findViewById(R.id.tv_desc);
+			holder.tv_title = (TextView) view.findViewById(R.id.tv_title);
+			view.setTag(holder);
 			final News news = data.get(position);
 			holder.tv_title.setText(news.getTitle());
 			holder.tv_desc.setText(news.getContent());
+			// 获取图片
+			String path = news.getBoardImgUrl();
+			String imageUrl = API.API10005 + "?imgUrl=" + path;
+			// 定义图片缓存路径
+			String path1 = FileManager.getInitialize().getSDOrCache(
+					getActivity(), Setting.CACHE_IMAGE_PATH)
+					+ FileManager.getInitialize().formatPath(path);
+			AsyncImageLoader.getInstance().loadDrawable(getActivity(),
+					imageUrl, path1, true,
+					new AsyncImageLoader.ImageCallback() {
+						@Override
+						public void imageLoaded(Drawable imageDrawable,
+								String imageUrl) {
+							holder.iv_icon.setImageDrawable(imageDrawable);
+						}
+					});
 
 			view.setOnClickListener(new OnClickListener() {
 
