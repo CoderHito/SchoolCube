@@ -25,12 +25,9 @@ import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
 /**
- * <br/>
- * 异步加载图片 <br/>
- * AsyncImageLoader.java
+ * 异步加载图片
  * 
- * @author funny
- *         2012-9-23
+ * @author hito
  * 
  */
 public class AsyncImageLoader {
@@ -75,7 +72,8 @@ public class AsyncImageLoader {
 	 *            回调函数
 	 * @return
 	 */
-	public Drawable loadDrawable(final Context context, final String imageUrl, final String path, final ImageCallback callback) {
+	public Drawable loadDrawable(final Context context, final String imageUrl,
+			final String path, final ImageCallback callback) {
 		return loadDrawable(context, imageUrl, path, false, callback);
 	}
 
@@ -95,8 +93,11 @@ public class AsyncImageLoader {
 	 * @return
 	 */
 	@SuppressLint("HandlerLeak")
-	public Drawable loadDrawable(final Context context, final String imageUrl, final String path, final boolean isUseCache, final ImageCallback callback) {
-		if(StringUtils.isBlank(imageUrl) || !imageUrl.startsWith("http")) return null;
+	public Drawable loadDrawable(final Context context, final String imageUrl,
+			final String path, final boolean isUseCache,
+			final ImageCallback callback) {
+		if (StringUtils.isBlank(imageUrl) || !imageUrl.startsWith("http"))
+			return null;
 		if (isUseCache && imageCache.containsKey(imageUrl)) {
 			SoftReference<Drawable> softReference = imageCache.get(imageUrl);
 			if (softReference.get() != null) {
@@ -113,7 +114,8 @@ public class AsyncImageLoader {
 		};
 		mService.submit(new Runnable() {
 			public void run() {
-				Drawable drawable = getDrawableFromCache(context, imageUrl, path);
+				Drawable drawable = getDrawableFromCache(context, imageUrl,
+						path);
 				if (drawable == null) {
 					try {
 						saveInputStream(context, imageUrl, path);
@@ -121,7 +123,8 @@ public class AsyncImageLoader {
 						if (drawable == null) {
 							// 一秒后重试
 							saveInputStream(context, imageUrl, path);
-							drawable = getDrawableFromCache(context, imageUrl, path);
+							drawable = getDrawableFromCache(context, imageUrl,
+									path);
 						}
 					} catch (IOException e1) {
 						e1.printStackTrace();
@@ -129,7 +132,8 @@ public class AsyncImageLoader {
 					}
 				}
 				if (isUseCache && drawable != null) {
-					imageCache.put(imageUrl, new SoftReference<Drawable>(drawable));
+					imageCache.put(imageUrl, new SoftReference<Drawable>(
+							drawable));
 				}
 				handler.sendMessage(handler.obtainMessage(0, drawable));
 				if (drawable != null)
@@ -155,8 +159,10 @@ public class AsyncImageLoader {
 	 * @return bitmap格式的圖片
 	 */
 	@SuppressLint("HandlerLeak")
-	public Bitmap loadBitmap(final Context context, final String imageUrl, final String path, final ImageCallback callback) {
-		if(StringUtils.isBlank(imageUrl) || !imageUrl.startsWith("http")) return null;
+	public Bitmap loadBitmap(final Context context, final String imageUrl,
+			final String path, final ImageCallback callback) {
+		if (StringUtils.isBlank(imageUrl) || !imageUrl.startsWith("http"))
+			return null;
 		final Handler handler = new Handler() {
 			@Override
 			public void handleMessage(Message msg) {
@@ -207,7 +213,8 @@ public class AsyncImageLoader {
 	 * @throws IOException
 	 *             io异常
 	 */
-	public void saveInputStream(Context context, String imageUrl, String path) throws IOException {
+	public void saveInputStream(Context context, String imageUrl, String path)
+			throws IOException {
 		InputStream is = null;
 		HttpURLConnection conn = null;
 		FileOutputStream fos = null;
@@ -259,7 +266,8 @@ public class AsyncImageLoader {
 	 *            图片存储的路径
 	 * @return
 	 */
-	public Drawable getDrawableFromCache(Context context, String imageurl, String path) {
+	public Drawable getDrawableFromCache(Context context, String imageurl,
+			String path) {
 		if (imageurl == null || imageurl.equals(""))
 			return null;
 		File file = new File(path);
@@ -267,7 +275,8 @@ public class AsyncImageLoader {
 			return null;
 		try {
 			file.setLastModified(System.currentTimeMillis());
-			return (Drawable) (new BitmapDrawable(getBitmapFromCache(context, imageurl, path)));// Drawable.createFromPath(file.getAbsolutePath());
+			return (Drawable) (new BitmapDrawable(getBitmapFromCache(context,
+					imageurl, path)));// Drawable.createFromPath(file.getAbsolutePath());
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
@@ -288,7 +297,8 @@ public class AsyncImageLoader {
 	 *            图片存储的路径
 	 * @return
 	 */
-	public Bitmap getBitmapFromCache(Context context, String imageurl, String path) {
+	public Bitmap getBitmapFromCache(Context context, String imageurl,
+			String path) {
 		BitmapFactory.Options opt = new BitmapFactory.Options();
 		opt.inJustDecodeBounds = true;
 		BitmapFactory.decodeFile(path, opt);
@@ -327,7 +337,8 @@ public class AsyncImageLoader {
 		if (mScreenWidth > 0)
 			return mScreenWidth;
 		DisplayMetrics dm = new DisplayMetrics();
-		WindowManager windowManager = (WindowManager) context.getSystemService("window");
+		WindowManager windowManager = (WindowManager) context
+				.getSystemService("window");
 		windowManager.getDefaultDisplay().getMetrics(dm);
 		mScreenWidth = dm.widthPixels;
 		return dm.widthPixels;
@@ -343,7 +354,8 @@ public class AsyncImageLoader {
 		if (mScreenHeight > 0)
 			return mScreenHeight;
 		DisplayMetrics dm = new DisplayMetrics();
-		WindowManager windowManager = (WindowManager) context.getSystemService("window");
+		WindowManager windowManager = (WindowManager) context
+				.getSystemService("window");
 		windowManager.getDefaultDisplay().getMetrics(dm);
 		mScreenHeight = dm.heightPixels;
 		return mScreenHeight;
@@ -352,7 +364,7 @@ public class AsyncImageLoader {
 	/**
 	 * 图片下载完成后执行的操作 需要覆写iamgeLoaded(Drawable imageDrawable,String imageUrl)方法
 	 * 
-	 * @author zqx
+	 * @author hito
 	 * 
 	 */
 	public interface ImageCallback {
