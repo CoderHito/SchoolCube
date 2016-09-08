@@ -1,4 +1,4 @@
-package com.hito.schoolcube.fragment;
+package com.hito.schoolcube;
 
 import java.util.HashMap;
 import java.util.Map;

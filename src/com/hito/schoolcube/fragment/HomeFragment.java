@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.hito.schoolcube.R;
+import com.hito.schoolcube.ShowNewsActivity;
 import com.hito.schoolcube.api.API;
 import com.hito.schoolcube.entity.News;
 import com.hito.schoolcube.utils.AsyncImageLoader;

@@ -28,7 +28,7 @@
         <activity android:name="com.hito.schoolcube.RegisterActivity" />
         <activity android:name="com.hito.schoolcube.HomeActivity" />
         <activity android:name="com.hito.schoolcube.RegisterSendSMSActivity" />
-        <activity android:name="com.hito.schoolcube.fragment.ShowNewsActivity" />
+        <activity android:name="com.hito.schoolcube.ShowNewsActivity" />
     </application>
 
 </manifest>
