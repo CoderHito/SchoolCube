@@ -36,6 +36,8 @@ import android.widget.Toast;
 import com.hito.schoolcube.api.API;
 import com.hito.schoolcube.operate.UserOperate;
 import com.hito.schoolcube.operate.BaseOperate.AsyncRequestCallBack;
+import com.hito.schoolcube.utils.App;
+import com.hito.schoolcube.utils.ClientStoreUtil;
 import com.hito.schoolcube.utils.DialogUtils;
 import com.hito.schoolcube.utils.PostUtils;
 
@@ -57,10 +59,16 @@ public class LoginActivity extends Activity implements OnClickListener {
 			if (s == 1) {
 				DialogUtils.showToastShort(LoginActivity.this, "登录成功");
 				if (cb_remreber.isChecked()) {
-					Editor editor = sp.edit();
-					editor.putString("username", username);
-					editor.putString("pwd", pwd);
-					editor.commit();
+					App app = (App) getApplication();
+					userOperate.getUser().setPwd(pwd);
+					userOperate.getUser().setMobile(username);
+					// 保存用户到sharedpreference
+					ClientStoreUtil.setUser(getApplicationContext(),
+							userOperate.getUser());
+					// Editor editor = sp.edit();
+					// editor.putString("username", username);
+					// editor.putString("pwd", pwd);
+					// editor.commit();
 				}
 				enterHome();
 			} else {
@@ -141,13 +149,16 @@ public class LoginActivity extends Activity implements OnClickListener {
 			params.put("username", username);
 			params.put("pwd", pwd);
 			// API.API10001
-			userOperate.asyncRequest(params, API.API10001, new AsyncRequestCallBack() {
-				
-				@Override
-				public void callBack() {
-					handler.sendEmptyMessage(0);
-				}
-			});
+			userOperate.asyncRequest(params, API.API10001,
+					new AsyncRequestCallBack() {
+
+						@Override
+						public void callBack() {
+							handler.sendEmptyMessage(0);
+							// userOperate.getUser();
+
+						}
+					});
 
 			break;
 		case R.id.tv_register:
