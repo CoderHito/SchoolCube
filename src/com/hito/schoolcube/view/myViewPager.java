@@ -1,9 +1,14 @@
 package com.hito.schoolcube.view;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.hito.schoolcube.R;
+import com.hito.schoolcube.api.API;
+import com.hito.schoolcube.entity.Image;
+import com.hito.schoolcube.utils.BaseOperate.AsyncRequestCallBack;
 import com.hito.schoolcube.utils.NewsOperate;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -11,6 +16,7 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.PagerAdapter;
@@ -43,6 +49,9 @@ public class myViewPager extends FrameLayout {
 	private boolean isRunning;
 	private ArrayList<ImageView> imageViewsList;
 	private ArrayList<View> dotViewsList;
+	private List<Image> imgs;
+	private List<String> imgUrls;
+	private List<ImageView> downloadImageViews;
 
 	private Context context;
 
@@ -93,14 +102,46 @@ public class myViewPager extends FrameLayout {
 
 	@SuppressWarnings("deprecation")
 	private void initView() {
+		downloadImageViews = new ArrayList<>();
+		imgUrls = new ArrayList<>();
+//		downloadImage();
 		View view = View.inflate(getContext(), R.layout.myviewpager, this);
 		initImageLoader(context);
-		
-		
+
 		initView(view);
 
 		isRunning = true;
 		handler.sendEmptyMessageDelayed(0, 2000);
+	}
+
+	/**
+	 * œ¬‘ÿÕº∆¨
+	 */
+	private void downloadImage() {
+		Map<String, String> paris = new HashMap<>();
+		newsOperate.asyncRequest(paris, API.API10004,
+				new AsyncRequestCallBack() {
+
+					@Override
+					public void callBack() {
+						imgs = newsOperate.getImagePath();
+						if (imgs == null) {
+							return;
+						}
+						new GetListTask();
+					}
+				});
+	}
+
+	class GetListTask extends AsyncTask<String, Integer, Boolean> {
+
+		@Override
+		protected Boolean doInBackground(String... params) {
+			for (Image temp : imgs) {
+				imgUrls.add(API.API10005 + "?imgUrl=" + temp.getPath());
+			}
+			return true;
+		}
 
 	}
 

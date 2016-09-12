@@ -17,6 +17,10 @@ public class NewsOperate extends BaseOperate {
 	private static final String TAG = "NewsOperate";
 	private int s;
 	private List<Image> imagePath;
+	public List<Image> getImagePath() {
+		return imagePath;
+	}
+
 	private List<News> ns;
 	private News news;
 
@@ -29,6 +33,7 @@ public class NewsOperate extends BaseOperate {
 	public List<News> getNs() {
 		return ns;
 	}
+
 	public News getNews() {
 		return news;
 	}

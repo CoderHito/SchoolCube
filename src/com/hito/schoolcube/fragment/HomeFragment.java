@@ -49,12 +49,6 @@ public class HomeFragment extends Fragment implements OnClickListener {
 	private ListView listView;
 	private NewsOperate newsOperate;
 
-	private Handler handler = new Handler() {
-		public void handleMessage(android.os.Message msg) {
-
-		};
-	};
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -64,7 +58,8 @@ public class HomeFragment extends Fragment implements OnClickListener {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_home, null);
+		// View view = inflater.inflate(R.layout.fragment_home, null);
+		View view = inflater.inflate(R.layout.fragment_home, container, false);
 		initView(view);
 		initNews();
 

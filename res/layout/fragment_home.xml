@@ -42,7 +42,7 @@
             android:text="本校活动" />
     </LinearLayout>
 
-    <com.hito.schoolcube.view.PullToRefush
+    <com.hito.schoolcube.view.RefreshableView
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
@@ -51,6 +51,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" >
         </ListView>
-    </com.hito.schoolcube.view.PullToRefush>
+    </com.hito.schoolcube.view.RefreshableView>
 
 </LinearLayout>
