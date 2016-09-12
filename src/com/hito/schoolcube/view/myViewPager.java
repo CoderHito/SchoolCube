@@ -170,7 +170,7 @@ public class myViewPager extends FrameLayout {
 		viewPager = (ViewPager) view.findViewById(R.id.viewPager);
 		tv_title = (TextView) view.findViewById(R.id.tv_title);
 		ll_point = (LinearLayout) view.findViewById(R.id.ll_point);
-
+//downloadImage();
 		imageViews = new ArrayList<>();
 		for (int i = 0; i < ids.length; i++) {
 			ImageView imageView = new ImageView(context);

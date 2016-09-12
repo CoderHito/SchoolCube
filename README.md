@@ -8,3 +8,5 @@
 ## PullToRefresh的使用
 
 ## 自定义ViewPager中使用ImageLoader异步加载图片
+
+##CircleImageView
