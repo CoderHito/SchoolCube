@@ -6,8 +6,8 @@ import java.util.Map;
 import com.hito.schoolcube.R;
 import com.hito.schoolcube.api.API;
 import com.hito.schoolcube.entity.News;
-import com.hito.schoolcube.utils.BaseOperate.AsyncRequestCallBack;
-import com.hito.schoolcube.utils.NewsOperate;
+import com.hito.schoolcube.operate.NewsOperate;
+import com.hito.schoolcube.operate.BaseOperate.AsyncRequestCallBack;
 import com.hito.schoolcube.view.myWebView;
 import com.hito.schoolcube.view.myWebView.onScrollChangedCallBack;
 
